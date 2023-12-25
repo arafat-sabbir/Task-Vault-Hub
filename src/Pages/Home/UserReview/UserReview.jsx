@@ -1,4 +1,9 @@
+import { useInView } from "framer-motion"
+import { useRef } from "react"
+
 const UserReview = () => {
+  const animate1 = useRef(null)
+  const isInView1 = useInView(animate1)
   return (
     <div id="userReview" >
       <div>
@@ -13,7 +18,11 @@ const UserReview = () => {
             </p>
 
             <div className="grid grid-cols-1 gap-8 mx-auto mt-8 lg:grid-cols-2 xl:mt-10 max-w-7xl">
-              <div className="p-6 bg-gray-100 rounded-lg dark:bg-gray-800 md:p-8">
+              <div ref={animate1} style={{
+              transform: isInView1 ? "none" : "translateX(-200px)",
+              opacity: isInView1 ? "1" : "0",
+              transition: "all 1.8s",
+            }} className="p-6 bg-gray-100 rounded-lg dark:bg-gray-800 md:p-8">
                 <p className="leading-loose text-gray-500 font-medium dark:text-gray-300">
                   “"This task Vault Website is a game-changer. The sleek design and intuitive features make it easy to stay organized and on top of my tasks. It's become an essential part of my daily routine, and I love how it streamlines my workflow effortlessly.”.
                 </p>
@@ -34,7 +43,11 @@ const UserReview = () => {
                 </div>
               </div>
 
-              <div className="p-6 bg-gray-100 rounded-lg dark:bg-gray-800 md:p-8">
+              <div ref={animate1} style={{
+              transform: isInView1 ? "none" : "translateX(200px)",
+              opacity: isInView1 ? "1" : "0",
+              transition: "all 1.8s",
+            }} className="p-6 bg-gray-100 rounded-lg dark:bg-gray-800 md:p-8">
                 <p className="leading-loose text-gray-500 font-medium dark:text-gray-300">
                   “This Website has transformed how I manage tasks. The user-friendly interface and customizable options are spot-on. It keeps me on track without being overwhelming. A must-have for anyone looking to boost productivity with minimal effort”.
                 </p>

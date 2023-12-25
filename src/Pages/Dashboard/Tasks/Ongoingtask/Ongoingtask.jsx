@@ -1,7 +1,7 @@
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { VscEdit } from "react-icons/vsc";
 
-const OngoingTask = ({ task, handleDelete,handleEdit }) => {
+const OngoingTask = ({ task, handleDelete,handleEdit,handleMakeCompleted }) => {
   const {
     tasktitle,
     taskdeadline,
@@ -11,7 +11,7 @@ const OngoingTask = ({ task, handleDelete,handleEdit }) => {
     _id,
   } = task;
   return (
-    <div className="p-6 rounded-sm ">
+    <div className="p-6 rounded-sm lg:w-[450px] w-[400px] md:w-auto">
       <div className=" text-black mt-2">
         <div className="w-full flex flex-col px-4 py-3 bg-white rounded-md shadow-md dark:bg-gray-800">
           <div className="flex items-center justify-between">
@@ -24,7 +24,7 @@ const OngoingTask = ({ task, handleDelete,handleEdit }) => {
                 <VscEdit></VscEdit>
               </button>
               <button onClick={() => handleDelete(_id)} className="">
-                <RiDeleteBin6Line></RiDeleteBin6Line>
+                <RiDeleteBin6Line className="text-red-500 font-semibold"></RiDeleteBin6Line>
               </button>
             </span>
           </div>
@@ -35,12 +35,11 @@ const OngoingTask = ({ task, handleDelete,handleEdit }) => {
           </h1>
           <h3>{taskPriority}</h3>
          </div>
-            <p className="mt-2 text-base text-gray-600 dark:text-gray-300">
-              alkdflkajdflkjalkdsjflkjajd
-              lfnlakjdflkadsflkadjfkljan
-              dlfnldfnaljkn
+            <p className="mt-2 overflow-hidden text-base text-gray-600 dark:text-gray-300">
+              {description}
             </p>
           </div>
+            <button onClick={()=>handleMakeCompleted(_id)} className="bg-green-100 px-2 mt-2    py-1">Make Complete</button>
         </div>
       </div>
     </div>

@@ -55,10 +55,10 @@ const Tasks = () => {
   };
   // Close the modal with cancel button
   const handleCancel = (e) => {
+    setPriority('')
     e.preventDefault();
     document.getElementById("my_modal_1").close();
     document.getElementById("my_modal_2").close();
-    setPriority('')
     toast.error("Task Canceled");
   };
   // HandleFrom Submit
@@ -111,6 +111,18 @@ const Tasks = () => {
       }
     });
   };
+
+  // make the task complete 
+  const handleMakeCompleted=(cid)=>{
+    console.log(cid);
+    axios.patch(`/changeTaskStatus/${cid}?status=completed`)
+    .then(res=>{
+      if(res.data.modifiedCount>0){
+        toast.success("Task Completed")
+        refetch()
+      }
+    })
+  }
   // Open the modal for updating the tasks
   const [editId,setEditId] = useState('')
   const handleEdit = (id) => {
@@ -154,10 +166,10 @@ const Tasks = () => {
   return (
     <div>
       <div className="flex lg:justify-between justify-end min-w-full items-center">
-        <h1 className="text-3xl font-semibold lg:block hidden">Your Tasks</h1>
+        <h1 className="text-3xl font-semibold lg:block hidden lg:ml-6">Your Tasks</h1>
         <button
           onClick={() => document.getElementById("my_modal_1").showModal()}
-          className="flex font-semibold items-center bg-red-500 text-white px-4 py-2 rounded-sm"
+          className="flex font-semibold items-center bg-red-500 text-white px-4 py-2 rounded-sm lg:mr-6 mr-3 md:mr-6"
         >
           {" "}
           <GoPlus className="mr-2 text-xl"></GoPlus> New Tasks
@@ -311,10 +323,10 @@ const Tasks = () => {
       </div>
 
       {tasks && (
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1  py-10 gap-10">
-          <div className="bg-[#EEF2FC]">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1  py-10 gap-10 p-6 ">
+          <div className="bg-[#EEF2FC] rounded-sm -ml-3 md:-ml-0 lg:w-[450px] w-[400px] md:w-auto pb-4">
             <h3 className="text-3xl font-semibold ml-6 mt-6  ">
-              To Do : {toDo?.length}{" "}
+              To Do : {toDo?.length}
             </h3>
             {toDo?.map((item) => (
               <TodoTask
@@ -322,10 +334,12 @@ const Tasks = () => {
                 task={item}
                 handleDelete={handleDelete}
                 handleEdit={handleEdit}
+                handleMakeCompleted={handleMakeCompleted}
+                refetch={refetch}
               ></TodoTask>
             ))}
           </div>
-          <div className="bg-[#FFF6EB]">
+          <div className="bg-[#FFF6EB] -ml-3 md:-ml-0 rounded-sm lg:w-[450px] w-[400px] md:w-auto pb-4">
             <h3 className="text-3xl font-semibold ml-6 mt-6">
               On Going : {onGoing?.length}{" "}
             </h3>
@@ -335,10 +349,11 @@ const Tasks = () => {
                 task={item}
                 handleDelete={handleDelete}
                 handleEdit={handleEdit}
+                handleMakeCompleted={handleMakeCompleted}
               ></OngoingTask>
             ))}
           </div>
-          <div className="bg-[#FDF0EC]">
+          <div className="bg-[#FDF0EC] rounded-sm -ml-3 md:-ml-0 lg:w-[450px] w-[400px] md:w-auto pb-4">
             <h3 className="text-3xl font-semibold ml-6 mt-6">
               Completed : {complete?.length}
             </h3>

@@ -4,7 +4,7 @@ import { VscEdit } from "react-icons/vsc";
 const CompleteTask = ({ task, handleDelete, handleEdit }) => {
   const { tasktitle, taskdeadline, description, _id, taskPriority } = task;
   return (
-    <div className="p-6 rounded-sm ">
+    <div className="p-6 rounded-sm lg:w-[450px] w-[400px] md:w-auto">
       <div className=" text-black mt-2 w-full">
         <div className="w-full  px-4 py-3 bg-white rounded-md shadow-md dark:bg-gray-800">
           <div className="flex items-center justify-between">
@@ -17,7 +17,7 @@ const CompleteTask = ({ task, handleDelete, handleEdit }) => {
                 <VscEdit></VscEdit>
               </button>
               <button onClick={() => handleDelete(_id)} className="">
-                <RiDeleteBin6Line></RiDeleteBin6Line>
+                <RiDeleteBin6Line className="text-red-500 font-semibold"></RiDeleteBin6Line>
               </button>
             </span>
           </div>

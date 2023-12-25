@@ -6,11 +6,23 @@ import useAxios from "../../Utils/Hooks/axios/useaxios";
 import useAuth from "../../Utils/Hooks/useAuth/useAuth";
 import { useState } from "react";
 import { IoReturnUpBack } from "react-icons/io5";
+import axios from "axios";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const axios = useAxios();
+  const imageHostingKey = import.meta.env.VITE_IMAGE_HOST_KEY;
+  const imageHostingAPi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
+  const axiosSecure = useAxios();
+  const [photoName, setPhotoName] = useState("");
+  const [photo, setPhoto] = useState("");
+  const formData = new FormData();
+  formData.append("image", photo);
+  const handlePhotoUpload = (e) => {
+    e.preventDefault();
+    setPhotoName(e.target.files[0].name);
+    setPhoto(e.target.files[0]);
+  };
 
   const {
     register,
@@ -27,29 +39,31 @@ const SignUp = () => {
     setProfession(e.target.value);
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const toastid = toast.loading("Sign Up Processing");
-    signUpUser(data.email, data.password)
-      .then((res) => {
-        console.log(res.user);
+    const res = await axios.post(imageHostingAPi, formData, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
 
+    signUpUser(data.email, data.password)
+      .then(() => {
         // update the user profile on firebase with relevant data
 
-        updateUserProfile(data.name, data.photoUrl)
-          .then((res) => {
+        updateUserProfile(data.name, res.data.data.display_url)
+          .then(() => {
             const userdata = {
               email: data.email,
               name: data.name,
-              photo: data.photoUrl,
+              photo: res.data.data.display_url,
               type: profession,
               creationDate: new Date().toDateString(),
             };
-            console.log(data.photoUrl);
 
             // if the profile get update successfully Send the data to the server
 
-            axios.post("/createUser", userdata)
-            .then((res) => {
+            axiosSecure.post("/createUser", userdata).then((res) => {
               if (res.data.insertedId) {
                 toast.success("Sign Up SuccessFully", { id: toastid });
                 reset();
@@ -66,7 +80,7 @@ const SignUp = () => {
         console.log(data);
       })
 
-      //   If Email is already registered Send A toast to the user
+      // If Email is already registered Send A toast to the user
 
       .catch((error) => {
         if (error.code === "auth/email-already-in-use") {
@@ -120,7 +134,7 @@ const SignUp = () => {
                   placeholder="email"
                   name="email"
                   className="input input-bordered bg-gray-100 hover:bg-gray-100 border-dashed border-main focus:border-main"
-                  {...register("photo", { required: true })}
+                  {...register("email", { required: true })}
                 />
                 {errors.email && (
                   <p className="text-red-500 mt-4">Please Type An Email</p>
@@ -128,18 +142,24 @@ const SignUp = () => {
               </div>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="label-text">Photo</span>
                 </label>
-                <input
-                  type="file"
-                  placeholder="upload your Photo"
-                  name="email"
-                  className="input input-bordered bg-gray-100 hover:bg-gray-100 border-dashed border-main focus:border-main"
-                  {...register("email", { required: true })}
-                />
-                {errors.email && (
-                  <p className="text-red-500 mt-4">Please Type An Email</p>
-                )}
+
+                <div className="relative w-full">
+                  <label className="label absolute -z-50 input pt-2  input-bordered bg-gray-100 hover:bg-gray-100 border-dashed border-main focus:border-main w-full ">
+                    <span className="label-text ">
+                      {photoName || "Choose Profile Picture"}
+                    </span>
+                  </label>
+                  <input
+                    onChange={handlePhotoUpload}
+                    accept="images/*"
+                    type="file"
+                    placeholder="upload your Photo"
+                    name="email"
+                    className="input pt-2 opacity-0 input-bordered bg-gray-100 hover:bg-gray-100 border-dashed border-main focus:border-main"
+                  />
+                </div>
               </div>
               {/* for selecting profession */}
               <select
