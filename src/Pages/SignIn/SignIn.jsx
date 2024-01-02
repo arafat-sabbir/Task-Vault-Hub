@@ -34,14 +34,14 @@ const SignIn = () => {
       style={{backgroundImage:'url("https://i.ibb.co/7NJZ15z/13900642-5387142.jpg")'}}
     >
         <Link to={'/'}>
-       <button className=" text-black font-semibold flex justify-center gap-2  absolute left-96 top-10"> <span className="text-2xl"><IoReturnUpBack/></span> Back To Home</button>
+       <button className=" text-black font-semibold flex justify-center gap-2  absolute lg:left-96 lg:top-10 top-4 left-2"> <span className="text-2xl"><IoReturnUpBack/></span> Back To Home</button>
        </Link>
       <div className="flex h-screen gap-10 container mx-auto  justify-center items-center">
       <Helmet>
         <title>Task Vault || Sign In</title>
       </Helmet>
         <div className="lg:w-1/2 w-[90vw]">
-          <div className="card  lg:w-3/4  mx-auto shadow-[0_0_20px_] backdrop-blur-sm p-10 my-10">
+          <div className="card  lg:w-3/4  mx-auto shadow-[0_0_20px_] backdrop-blur-sm lg:p-10 lg:my-10">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="form-control">
                 <label className="label">

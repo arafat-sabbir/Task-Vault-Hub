@@ -1,22 +1,28 @@
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import CountUp from "react-countup";
 
 const UserStats = () => {
-  const animate1 = useRef(null)
-  const isInView1 = useInView(animate1)
+  const animate1 = useRef(null);
+  const isInView1 = useInView(animate1);
   return (
-    <div id="insight"  className="bg-[#FFF6EB] pb-6">
-        <h3 className="text-3xl font-semibold text-center pt-10">Website Stats</h3>
-        <div className="flex items-center justify-center  ">
-        
+    <div id="insight" className="bg-[#FFF6EB] pb-6">
+      <h3 className="text-3xl font-semibold text-center pt-10">
+        Website Stats
+      </h3>
+      <div className="flex items-center justify-center  ">
         <div className="flex-col items-center justify-center ">
           <div className="flex">
             <div className="flex lg:flex-row flex-col p-4 space-x-4 space-y-4 max-w-7xl justify-around w-full h-auto lg:h-60 items-center ">
-              <div ref={animate1} style={{
-              transform: isInView1 ? "none" : "translateX(-200px)",
-              opacity: isInView1 ? "1" : "0",
-              transition: "all 1.8s",
-            }} className="border rounded h-40 w-[100%] md:w-72 flex items-center justify-center ml-4 lg:px-0 px-6 bg-white shadow-xl md:mt-4">
+              <div
+                ref={animate1}
+                style={{
+                  transform: isInView1 ? "none" : "translateX(-200px)",
+                  opacity: isInView1 ? "1" : "0",
+                  transition: "all 1.8s",
+                }}
+                className="border rounded h-40 w-[100%] md:w-72 flex items-center justify-center ml-4 lg:px-0 px-6 bg-white shadow-xl md:mt-4"
+              >
                 <div className="flex-col space-y-2 items-center px-0 md:px-6">
                   <div className="flex items-center justify-between space-x-6">
                     <div className="flex items-center space-x-1 ">
@@ -31,7 +37,16 @@ const UserStats = () => {
                       30 Days
                     </div>
                   </div>
-                  <div className="text-3xl font-bold">1427</div>
+                  <div className="text-3xl font-bold">
+                    <CountUp
+                      start={0}
+                      enableScrollSpy={true}
+                      end={156}
+                      delay={1}
+                      duration={4}
+                      separator=" "
+                    />
+                  </div>
                   <div className="font-bold text-red-500 flex items-center space-x-1">
                     <div className="text-xl">
                       <ion-icon name="trending-down-outline"></ion-icon>
@@ -40,11 +55,15 @@ const UserStats = () => {
                   </div>
                 </div>
               </div>
-              <div ref={animate1} style={{
-              transform: isInView1 ? "none" : "scale(0)",
-              opacity: isInView1 ? "1" : "0",
-              transition: "all 1.8s",
-            }} className="border rounded h-40 w-[100%] md:w-72 flex items-center justify-center ml-4 lg:px-0 px-6 bg-white shadow-xl">
+              <div
+                ref={animate1}
+                style={{
+                  transform: isInView1 ? "none" : "scale(0)",
+                  opacity: isInView1 ? "1" : "0",
+                  transition: "all 1.8s",
+                }}
+                className="border rounded h-40 w-[100%] md:w-72 flex items-center justify-center ml-4 lg:px-0 px-6 bg-white shadow-xl"
+              >
                 <div className="flex-col space-y-2 items-center px-0 md:px-6">
                   <div className="flex items-center justify-between space-x-6">
                     <div className="flex items-center space-x-1 ">
@@ -59,7 +78,16 @@ const UserStats = () => {
                       30 Days
                     </div>
                   </div>
-                  <div className="text-3xl font-bold">127</div>
+                  <div className="text-3xl font-bold">
+                    <CountUp
+                      start={0}
+                      enableScrollSpy={true}
+                      end={127}
+                      duration={4}
+                      delay={1}
+                      separator=" "
+                    />
+                  </div>
                   <div className="font-bold text-green-500 flex items-center space-x-1">
                     <div className="text-xl">
                       <ion-icon name="trending-up-outline"></ion-icon>
@@ -68,11 +96,15 @@ const UserStats = () => {
                   </div>
                 </div>
               </div>
-              <div ref={animate1} style={{
-              transform: isInView1 ? "none" : "translateX(200px)",
-              opacity: isInView1 ? "1" : "0",
-              transition: "all 1.8s",
-            }}  className="border rounded h-40 w-[100%] md:w-72 flex items-center justify-center ml-4 lg:px-0 px-6 bg-white shadow-xl">
+              <div
+                ref={animate1}
+                style={{
+                  transform: isInView1 ? "none" : "translateX(200px)",
+                  opacity: isInView1 ? "1" : "0",
+                  transition: "all 1.8s",
+                }}
+                className="border rounded h-40 w-[100%] md:w-72 flex items-center justify-center ml-4 lg:px-0 px-6 bg-white shadow-xl"
+              >
                 <div className="flex-col space-y-2 items-center px-0 md:px-6">
                   <div className="flex items-center justify-between space-x-6">
                     <div className="flex items-center space-x-1 ">
@@ -87,7 +119,16 @@ const UserStats = () => {
                       30 Days
                     </div>
                   </div>
-                  <div className="text-3xl font-bold">456</div>
+                  <div className="text-3xl font-bold">
+                    <CountUp
+                      start={0}
+                      enableScrollSpy={true}
+                      end={456}
+                      delay={1}
+                      duration={4}
+                      separator=" "
+                    />
+                  </div>
                   <div className="font-bold text-green-500 flex items-center space-x-1">
                     <div className="text-xl">
                       <ion-icon name="trending-up-outline"></ion-icon>

@@ -97,7 +97,7 @@ const SignUp = () => {
       }}
     >
       <Link to={"/"}>
-        <button className=" text-black font-semibold flex justify-center gap-2  absolute left-96 top-10">
+        <button className=" text-black font-semibold flex justify-center gap-2  absolute lg:left-96 lg:top-10 top-0">
           {" "}
           <span className="text-2xl">
             <IoReturnUpBack />
@@ -110,7 +110,7 @@ const SignUp = () => {
           <title>Echo Estate || Sign Up</title>
         </Helmet>
         <div className="lg:w-1/2 w-[90vw]">
-          <div className="card  lg:w-3/4  mx-auto shadow-[0_0_20px_] backdrop-blur-sm p-10 my-10">
+          <div className="card  lg:w-3/4  mx-auto shadow-[0_0_20px_] backdrop-blur-sm lg:p-10 my-10">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="form-control">
                 <label className="label">
